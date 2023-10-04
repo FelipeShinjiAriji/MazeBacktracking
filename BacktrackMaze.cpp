@@ -6,7 +6,12 @@
 //#include <windows.h> // for windows
 #include <unistd.h>  // for linux
 
+#include "pilhaEncadeada.cpp"
+
 using namespace std;
+
+pilhaEncadeada positionStack = pilhaEncadeada();
+
 
 void printMatrix(const vector<string>& inputMatrix) {
     for (const string& line : inputMatrix) {
@@ -25,6 +30,9 @@ vector<string> readFile(const string& inputFile) {
     getline(readedFile, readedLine);
     mazeSize = stoi(readedLine);
 
+    vector<int> firstPosition;
+    bool lastPositionFound = false;
+
     for (int i = 0; i < mazeSize; i++) {
         getline(readedFile, readedLine);
         string outputLine;
@@ -37,14 +45,21 @@ vector<string> readFile(const string& inputFile) {
             } 
             else if (c == '2') {
                 outputLine += "° ";
+                positionStack.push(i, ((outputLine.size()-3)/2));
             } 
             else if (c == '3') {
                 outputLine += "@ ";
+                lastPositionFound = true;
             }
         }
         outputMatrix.push_back(outputLine);
     }
     readedFile.close();
+
+    if(!lastPositionFound){
+        cout << "Last position not found" << endl;
+        exit(1);
+    }
 
     return outputMatrix;
 }
