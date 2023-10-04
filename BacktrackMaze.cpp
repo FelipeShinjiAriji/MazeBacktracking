@@ -64,10 +64,25 @@ vector<string> readFile(const string& inputFile) {
     return outputMatrix;
 }
 
+void printTrack(pilhaEncadeada positionStack){
+    pilhaEncadeada positionStackCopy = pilhaEncadeada();
+    while(!positionStack.isEmpty()){
+        int* position = positionStack.pop();
+        positionStackCopy.push(*position, *(position+1));
+    }
+    printf("Caminho correto: ");
+    int* position;
+    while(!positionStackCopy.isEmpty()){
+        position = positionStackCopy.pop();
+        printf("(%d, %d) ", *position, *(position+1));
+    }
+    printf("\n");
+}
+
 // para testar o labinto.txt
 int main(){
     vector<string> readedFile = readFile("labirinto.txt");
-
+    
     while(true){
         printMatrix(readedFile);
         sleep(1);
@@ -76,6 +91,8 @@ int main(){
         cout << endl;
         break;
     }
+
+    printTrack(positionStack);
 
     return 0;
 }
