@@ -15,7 +15,15 @@ pilhaEncadeada positionStack = pilhaEncadeada();
 
 void printMatrix(const vector<string>& inputMatrix) {
     for (const string& line : inputMatrix) {
-        cout << line << endl;
+        for(char c: line){
+            if(c == 'X'){
+                cout << " ";
+            }
+            else{
+                cout << c;
+            }
+        }
+        printf("\n");
     }
 }
 
