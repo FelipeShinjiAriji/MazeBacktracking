@@ -27,13 +27,13 @@ void pilhaEncadeada::push(int x, int y) {
 
 int* pilhaEncadeada::pop() {
     if(pilhaEncadeada::size <= 0){
-        int errorArray[2];
+        int* errorArray = new int[2];
         errorArray[0] = -1;
         errorArray[1] = -1; 
         return errorArray;
     }
     else{
-        int poppedElement[2];
+        int* poppedElement = new int[2];
         poppedElement[0] = pilhaEncadeada::top -> x;
         poppedElement[1] = pilhaEncadeada::top -> y;
         pilhaEncadeada::top = pilhaEncadeada::top -> next;
