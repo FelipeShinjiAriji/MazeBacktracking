@@ -2,8 +2,8 @@
 #define CELL_HPP
 
 struct cell {
-    int x;
-    int y;
+    int row;
+    int column;
     cell *next;
 };
 

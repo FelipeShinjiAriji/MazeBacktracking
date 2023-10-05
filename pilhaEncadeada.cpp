@@ -15,10 +15,10 @@ bool pilhaEncadeada::isEmpty() {
     }
 }
 
-void pilhaEncadeada::push(int x, int y) {
+void pilhaEncadeada::push(int row, int column) {
     cell* newCell = new cell;
-    newCell->x = x;
-    newCell->y = y;
+    newCell->row = row;
+    newCell->column = column;
     newCell->next = pilhaEncadeada::top;
 
     pilhaEncadeada::top = newCell;
@@ -30,12 +30,13 @@ int* pilhaEncadeada::pop() {
         int* errorArray = new int[2];
         errorArray[0] = -1;
         errorArray[1] = -1; 
+        pilhaEncadeada::size = pilhaEncadeada::size - 1;
         return errorArray;
     }
     else{
         int* poppedElement = new int[2];
-        poppedElement[0] = pilhaEncadeada::top -> x;
-        poppedElement[1] = pilhaEncadeada::top -> y;
+        poppedElement[0] = pilhaEncadeada::top -> row;
+        poppedElement[1] = pilhaEncadeada::top -> column;
         pilhaEncadeada::top = pilhaEncadeada::top -> next;
         pilhaEncadeada::size = pilhaEncadeada::size - 1;
         delete(pilhaEncadeada::top);

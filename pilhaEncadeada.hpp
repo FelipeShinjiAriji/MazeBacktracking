@@ -13,7 +13,7 @@ public:
     pilhaEncadeada();
 
     bool isEmpty();
-    void push(int x, int y);
+    void push(int row, int column);
     int* pop();
     int getSize();
 
