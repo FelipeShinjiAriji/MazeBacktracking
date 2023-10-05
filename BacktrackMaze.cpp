@@ -12,7 +12,6 @@ using namespace std;
 
 pilhaEncadeada positionStack = pilhaEncadeada();
 
-
 void printMatrix(const vector<string>& inputMatrix) {
     for (const string& line : inputMatrix) {
         for(char c: line){
@@ -22,6 +21,7 @@ void printMatrix(const vector<string>& inputMatrix) {
             else{
                 cout << c;
             }
+            cout << " ";
         }
         printf("\n");
     }
@@ -46,17 +46,17 @@ vector<string> readFile(const string& inputFile) {
         string outputLine;
         for (char c : readedLine) {
             if (c == '0') {
-                outputLine += "  ";
+                outputLine += ' ';
             } 
             else if (c == '1') {
-                outputLine += "# ";
+                outputLine += '#';
             } 
             else if (c == '2') {
-                outputLine += "° ";
+                outputLine += 'P';
                 positionStack.push(i, ((outputLine.size()-3)/2));
             } 
             else if (c == '3') {
-                outputLine += "@ ";
+                outputLine += '@';
                 lastPositionFound = true;
             }
         }
