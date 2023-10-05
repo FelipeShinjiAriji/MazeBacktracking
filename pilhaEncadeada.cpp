@@ -38,7 +38,7 @@ int* pilhaEncadeada::pop() {
         poppedElement[1] = pilhaEncadeada::top -> column;
         pilhaEncadeada::top = pilhaEncadeada::top -> next;
         pilhaEncadeada::size = pilhaEncadeada::size - 1;
-        delete(pilhaEncadeada::top);
+        //delete(pilhaEncadeada::top);
         return poppedElement;
     }
 }
