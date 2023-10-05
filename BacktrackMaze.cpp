@@ -170,39 +170,17 @@ void printTrack(){
     printf("\n");
 }
 
-// para testar o labinto.txt
 int main(){
     vector<string> readedFile = readFile("labirinto.txt");
     
-    while(true){
-        printMatrix(readedFile);
-        sleep(1);
-        cout << endl;
-        printMatrix(readedFile);
-        cout << endl;
-        break;
-    }
+    cout << "Labirinto inicial: " << endl;
+    printMatrix(readedFile);
+    sleep(1);
+    
+    int* position = positionStack.pop();
+    positionStack.push(*position, *(position+1));
 
-    move(readedFile, 1, 1);
+    move(readedFile, *position, *(position+1));
     printTrack();
     return 0;
 }
-
-/* Para poder testar diversos labirintos
-int main(int argc , char ** argv) {
-    for(int i = 1; i < argc; i++){
-        vector<string> readedFile = readFile(argv[i]);
-
-        while(true){
-            printMatrix(readedFile);
-            sleep(1);
-            cout << endl;
-            printMatrix(readedFile);
-            cout << endl;
-            break;
-        }
-    }
-
-    return 0;
-}
-*/
