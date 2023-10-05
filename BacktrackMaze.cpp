@@ -12,6 +12,63 @@ using namespace std;
 
 pilhaEncadeada positionStack = pilhaEncadeada();
 
+bool move(vector<string>& inputMatrix, int row, int column){
+    bool end = false;
+    if(inputMatrix[row][column+1] == '@'){
+        cout << "fim Direita" << endl;
+        inputMatrix[row][column] = '.';
+        inputMatrix[row][column+1] = 'P';
+        end = true;
+    }
+    else if(inputMatrix[row+1][column] == '@'){
+        cout << "fim Baixo" << endl;
+        inputMatrix[row][column] = '.';
+        inputMatrix[row+1][column] = 'P';
+        end = true;
+    }
+    else if(inputMatrix[row-1][column] == '@'){
+        cout << "fim Cima" << endl;
+        inputMatrix[row][column] = '.';
+        inputMatrix[row-1][column] = 'P';
+        end = true;
+    }
+    else if(inputMatrix[row][column-1] == '@'){
+        cout << "fim Esquerda" << endl;
+        inputMatrix[row][column] = '.';
+        inputMatrix[row][column-1] = 'P';
+        end = true;
+    }
+    else{
+        if(inputMatrix[row][column+1] == ' '){
+            cout << "Direita" << endl;
+            positionStack.push(row,column+1);
+            inputMatrix[row][column] = '.';
+            inputMatrix[row][column+1] = 'P';
+        }
+        else if(inputMatrix[row+1][column] == ' '){
+            cout << "Baixo" << endl;
+            positionStack.push(row+1,column);
+            inputMatrix[row][column] = '.';
+            inputMatrix[row+1][column] = 'P';
+        }
+        else if(inputMatrix[row-1][column] == ' '){
+            cout << "Cima" << endl;
+            positionStack.push(row-1,column);
+            inputMatrix[row][column] = '.';
+            inputMatrix[row-1][column] = 'P';
+        }
+        else if(inputMatrix[row][column-1] == ' '){
+            cout << "Esquerda" << endl;
+            positionStack.push(row,column-1);
+            inputMatrix[row][column] = '.';
+            inputMatrix[row][column-1] = 'P';
+        }
+        else{
+            cout << "Retorne" << endl;
+        }
+    }
+    return end;
+}
 
 void printMatrix(const vector<string>& inputMatrix) {
     for (const string& line : inputMatrix) {
@@ -73,14 +130,14 @@ vector<string> readFile(const string& inputFile) {
     return outputMatrix;
 }
 
-void printTrack(pilhaEncadeada positionStack){
+void printTrack(){
     pilhaEncadeada positionStackCopy = pilhaEncadeada();
+    int* position;
     while(!positionStack.isEmpty()){
-        int* position = positionStack.pop();
+        position = positionStack.pop();
         positionStackCopy.push(*position, *(position+1));
     }
     printf("Caminho correto: ");
-    int* position;
     while(!positionStackCopy.isEmpty()){
         position = positionStackCopy.pop();
         printf("(%d, %d) ", *position, *(position+1));
@@ -101,7 +158,14 @@ int main(){
         break;
     }
 
-    printTrack(positionStack);
+    move(readedFile, 1, 1);
+    printMatrix(readedFile);
+    cout << endl;
+    move(readedFile, 2, 1);
+    move(readedFile, 3, 1);
+    move(readedFile, 3, 2);
+    move(readedFile, 3, 3);
+    printMatrix(readedFile);
 
     return 0;
 }
