@@ -28,43 +28,38 @@ void printMatrix(const vector<string>& inputMatrix) {
     }
 }
 
-bool move(vector<string>& inputMatrix, int row, int column){
-    bool end = false;
+void move(vector<string>& inputMatrix, int row, int column){
     if(inputMatrix[row][column+1] == '@'){
-        cout << "Direita fim" << endl;
+        cout << "Direita" << endl;
         inputMatrix[row][column] = '.';
         inputMatrix[row][column+1] = 'P';
-        end = true;
         printMatrix(inputMatrix);
         sleep(1);
-        cout << endl;
+        cout << "FIM" << endl;
     }
     else if(inputMatrix[row+1][column] == '@'){
-        cout << "Baixo fim" << endl;
+        cout << "Baixo" << endl;
         inputMatrix[row][column] = '.';
         inputMatrix[row+1][column] = 'P';
-        end = true;
         printMatrix(inputMatrix);
         sleep(1);
-        cout << endl;
+        cout << "FIM" << endl;
     }
     else if(inputMatrix[row-1][column] == '@'){
-        cout << "Cima fim" << endl;
+        cout << "Cima" << endl;
         inputMatrix[row][column] = '.';
         inputMatrix[row-1][column] = 'P';
-        end = true;
         printMatrix(inputMatrix);
         sleep(1);
-        cout << endl;
+        cout << "FIM" << endl;
     }
     else if(inputMatrix[row][column-1] == '@'){
-        cout << "Esquerda fim" << endl;
+        cout << "Esquerda" << endl;
         inputMatrix[row][column] = '.';
         inputMatrix[row][column-1] = 'P';
-        end = true;
         printMatrix(inputMatrix);
         sleep(1);
-        cout << endl;
+        cout << "FIM" << endl;
     }
     else{
         if(inputMatrix[row][column+1] == ' '){
@@ -105,9 +100,14 @@ bool move(vector<string>& inputMatrix, int row, int column){
         }
         else{
             cout << "Retorne" << endl;
+            int* position = positionStack.pop();
+            inputMatrix[row][column] = 'X';
+            inputMatrix[*position][*(position+1)] = 'P';
+            printMatrix(inputMatrix);
+            sleep(1);
+            move(inputMatrix, *position, *(position+1));
         }
     }
-    return end;
 }
 
 vector<string> readFile(const string& inputFile) {
@@ -184,7 +184,7 @@ int main(){
     }
 
     move(readedFile, 1, 1);
-
+    printTrack();
     return 0;
 }
 
