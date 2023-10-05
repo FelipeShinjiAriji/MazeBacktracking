@@ -30,7 +30,6 @@ int* pilhaEncadeada::pop() {
         int* errorArray = new int[2];
         errorArray[0] = -1;
         errorArray[1] = -1; 
-        pilhaEncadeada::size = pilhaEncadeada::size - 1;
         return errorArray;
     }
     else{
